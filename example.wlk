@@ -109,10 +109,10 @@ class Dependencia {
 class Pedido {
   const pedidos = []
 
-  var distancia
+  const distancia
   var tiempoMaximo
-  var cantidadPasajeros
-  var coloresIncompatibles
+  const cantidadPasajeros
+  const coloresIncompatibles
 
   method distancia() = distancia
   method tiempoMaximo() = tiempoMaximo
@@ -139,7 +139,13 @@ class Pedido {
   method totalDePasajeros() {
     return pedidos.sum({pedido => pedido.cantidadPasajeros()})
   }
-
+  method pedidoRegistrado(rodado) {
+    return pedidos.filter({pedido => 
+    !(pedido.any({pedido => pedido.puedeSatisfacer(rodado)})) })
+  }
+  method colorRegistrado(color) {
+    return pedidos.all({pedido => pedido.coloresIncompatibles().contains(color)})
+  }
 }
 
 
